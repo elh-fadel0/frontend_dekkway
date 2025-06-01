@@ -157,6 +157,7 @@ export default function DetailLog() {
     }
     try {
       const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/details-logements/${params.id}/`);
+      const data = response.data as { bailleur?: any; agent?: any };
       setLogement(response.data as Logement);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Une erreur est survenue');

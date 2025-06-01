@@ -57,8 +57,8 @@ export default function ReservationDetails() {
           
           // Récupérer les informations du bailleur depuis l'API
           try {
-            const response = await axios.get(`http://127.0.0.1:8000/details-logements/${id}/`);
-            const data = response.data;
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/details-logements/${id}/`);
+            const data = response.data as { bailleur?: any; agent?: any };
             
             console.log("Données reçues de l'API:", data);
             
