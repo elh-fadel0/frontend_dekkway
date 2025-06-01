@@ -30,11 +30,11 @@ const Filtre = () => {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const [selectedPropertyTypes, setSelectedPropertyTypes] = useState<string[]>([]);
   const [selectedDuration, setSelectedDuration] = useState("");
-  const [priceRange, setPriceRange] = useState<[number, number]>([25000, 1000000]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([10000, 1000000]);
   const [bedrooms, setBedrooms] = useState<number | null>(null);
   const [equipments, setEquipments] = useState<string[]>([]);
   const [city, setCity] = useState("");
-  const [coordinates, setCoordinates] = useState<[number, number]>([14.6937, -17.4441]); // Dakar par défaut
+  const [coordinates, setCoordinates] = useState<[number, number]>([14.790375831663972, -16.92625619442396]); // Thiès par défaut
   const [searchRadius, setSearchRadius] = useState<number>(1); // 5km par défaut
   const [useMapFilter, setUseMapFilter] = useState<boolean>(false);
   const [deviceType, setDeviceType] = useState<"mobile" | "tablet" | "desktop">("desktop");
@@ -134,51 +134,63 @@ const Filtre = () => {
   const handleReset = () => {
     setSelectedPropertyTypes([]);
     setSelectedDuration("");
-    setPriceRange([50000, 1000000]);
+    setPriceRange([10000, 1000000]);
     setBedrooms(null);
     setEquipments([]);
     setCity("");
     setUseMapFilter(false);
     setSearchRadius(5);
-    setCoordinates([14.6937, -17.4441]);
+    setCoordinates([14.790375831663972, -16.92625619442396]); // Thiès
+    
+    // Rediriger vers l'URL sans paramètres
+    router.push('/');
   };
 
   const handleApply = async () => {
     try {
       const params = new URLSearchParams();
-
+      let hasFilters = false;
+  
       // Types de propriété (convertis en minuscules)
       if (selectedPropertyTypes.length > 0 && !selectedPropertyTypes.includes('Tout')) {
         const typesParam = selectedPropertyTypes.map(type => type.toLowerCase()).join(',');
         params.append('type', typesParam);
+        hasFilters = true;
       }
       
       // Durée (converti en minuscules)
       if (selectedDuration) {
         // Utiliser la valeur exacte comme dans le modèle Django
         params.append('duree', selectedDuration.toLowerCase());
+        hasFilters = true;
       }
-
+  
       // Prix (adaptation aux paramètres Django)
-      params.append('prix_min', priceRange[0].toString());
-      params.append('prix_max', priceRange[1].toString());
-
+      if (priceRange[0] !== 10000 || priceRange[1] !== 1000000) {
+        params.append('prix_min', priceRange[0].toString());
+        params.append('prix_max', priceRange[1].toString());
+        hasFilters = true;
+      }
+  
       // Chambres (nom de paramètre Django)
       if (bedrooms !== null) {
         params.append('nombre_de_chambres', bedrooms.toString());
+        hasFilters = true;
       }
-
+  
       // Équipements (format spécifique avec :true)
       if (equipments.length > 0) {
         const equipementsStr = equipments
           .map(eq => `${eq.toLowerCase()}:true`)
           .join(',');
         params.append('equipements', equipementsStr);
+        hasFilters = true;
       }
-
+  
       // Ville (normalisation pour correspondre au paramètre 'region')
       if (city) {
         params.append('region', normalizeRegion(city));
+        hasFilters = true;
       }
       
       // Ajout des paramètres de localisation si le filtre par carte est activé
@@ -186,11 +198,18 @@ const Filtre = () => {
         params.append('lat', coordinates[0].toString());
         params.append('lng', coordinates[1].toString());
         params.append('rayon', searchRadius.toString());
+        hasFilters = true;
       }
-
-      router.push(`/?${params.toString()}`);
+  
+      // Ne pas ajouter de paramètres à l'URL si aucun filtre n'est sélectionné
+      if (hasFilters) {
+        router.push(`/?${params.toString()}`);
+      } else {
+        router.push('/');
+      }
+      
       setIsFilterVisible(false);
-
+  
     } catch (error) {
       console.error("Erreur lors de l'application des filtres :", error);
     }
