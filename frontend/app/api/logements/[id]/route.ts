@@ -1,4 +1,5 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { type NextApiRequest } from 'next';
 
 interface Logement {
   id: string;
@@ -184,22 +185,24 @@ const localLogements: Record<string, Logement> = {
   }
 };
 
+type Params = { params: { id: string } };
+
 export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: Params
 ) {
   try {
     // Simulation de latence
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    if (!params?.id) {
+    if (!context.params?.id) {
       return NextResponse.json(
         { error: "ID manquant" },
         { status: 400 }
       );
     }
 
-    const logement = localLogements[params.id];
+    const logement = localLogements[context.params.id];
 
     if (!logement) {
       return NextResponse.json(

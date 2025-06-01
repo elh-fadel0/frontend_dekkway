@@ -38,7 +38,7 @@ const PriceRange: React.FC<PriceRangeProps> = ({ priceRange, onChange }) => {
       </div>
 
       {/* Slider de sélection de prix */}
-      // Modifier les valeurs min et max du slider
+      {/* Modifier les valeurs min et max du slider */}
       <Slider
         value={priceRange}
         onChange={(event, newValue) => onChange(newValue as number[])}

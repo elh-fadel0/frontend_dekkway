@@ -9,7 +9,7 @@ export default function ModifierMotDePasse() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
+  const [_error, setError] = useState(""); // Préfixé avec underscore pour indiquer qu'elle est intentionnellement non utilisée
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -73,7 +73,7 @@ export default function ModifierMotDePasse() {
         <h2 className="text-xl font-semibold text-[#014F86] mb-4 text-center">Modifier le mot de passe</h2>
 
         {/* Affichage des erreurs */}
-        {error && <p className="text-red-500 text-center mb-3">{error}</p>}
+        {_error && <p className="text-red-500 text-center mb-3">{_error}</p>}
 
         {/* Formulaire de modification de mot de passe */}
         <form onSubmit={handleSubmit} className="space-y-4">

@@ -11,24 +11,24 @@ export default function AnnulationPage() {
       <div className="bg-white rounded-lg shadow-md p-6 mb-8">
         <h2 className="text-2xl font-semibold text-[#014F86] mb-4">Politique d'annulation</h2>
         <p className="text-gray-700 mb-4">
-          Chez Dekkway, nous comprenons que les plans peuvent changer. C'est pourquoi nous proposons différentes options d'annulation pour nos utilisateurs.
-          Veuillez noter que les conditions d'annulation peuvent varier selon le logement et sont clairement indiquées sur la page de chaque annonce avant la réservation.
+          Chez Dekkway, nous comprenons que les plans peuvent changer. C&apos;est pourquoi nous proposons différentes options d&apos;annulation pour nos utilisateurs.
+          Veuillez noter que les conditions d&apos;annulation peuvent varier selon le logement et sont clairement indiquées sur la page de chaque annonce avant la réservation.
         </p>
         
         <div className="mt-6 space-y-6">
           <div className="border-l-4 border-[#014F86] pl-4">
             <h3 className="text-xl font-semibold text-[#014F86] mb-2">Annulation flexible</h3>
-            <p className="text-gray-700">Remboursement complet si l'annulation est effectuée 7 jours avant l'arrivée. Remboursement de 50% jusqu'à 3 jours avant l'arrivée.</p>
+            <p className="text-gray-700">Remboursement complet si l&apos;annulation est effectuée 7 jours avant l&apos;arrivée. Remboursement de 50% jusqu&apos;à 3 jours avant l&apos;arrivée.</p>
           </div>
           
           <div className="border-l-4 border-[#014F86] pl-4">
             <h3 className="text-xl font-semibold text-[#014F86] mb-2">Annulation modérée</h3>
-            <p className="text-gray-700">Remboursement complet si l'annulation est effectuée 14 jours avant l'arrivée. Remboursement de 50% jusqu'à 7 jours avant l'arrivée.</p>
+            <p className="text-gray-700">Remboursement complet si l&apos;annulation est effectuée 14 jours avant l&apos;arrivée. Remboursement de 50% jusqu&apos;à 7 jours avant l&apos;arrivée.</p>
           </div>
           
           <div className="border-l-4 border-[#014F86] pl-4">
             <h3 className="text-xl font-semibold text-[#014F86] mb-2">Annulation stricte</h3>
-            <p className="text-gray-700">Remboursement de 50% si l'annulation est effectuée 30 jours avant l'arrivée. Aucun remboursement pour les annulations effectuées moins de 30 jours avant l'arrivée.</p>
+            <p className="text-gray-700">Remboursement de 50% si l&apos;annulation est effectuée 30 jours avant l&apos;arrivée. Aucun remboursement pour les annulations effectuées moins de 30 jours avant l&apos;arrivée.</p>
           </div>
           
           <div className="border-l-4 border-[#FC9B89] pl-4">
@@ -94,8 +94,8 @@ export default function AnnulationPage() {
           </div>
           
           <div className="border-b pb-4">
-            <h3 className="text-lg font-medium text-[#014F86] mb-2">Puis-je modifier ma réservation au lieu de l'annuler ?</h3>
-            <p className="text-gray-700">Oui, dans de nombreux cas, vous pouvez modifier votre réservation (dates, nombre de voyageurs) sans l'annuler complètement. Consultez les détails de votre réservation pour voir les options disponibles.</p>
+            <h3 className="text-lg font-medium text-[#014F86] mb-2">Puis-je modifier ma réservation au lieu de l&apos;annuler ?</h3>
+            <p className="text-gray-700">Oui, dans de nombreux cas, vous pouvez modifier votre réservation (dates, nombre de voyageurs) sans l&apos;annuler complètement. Consultez les détails de votre réservation pour voir les options disponibles.</p>
           </div>
           
           <div className="border-b pb-4">

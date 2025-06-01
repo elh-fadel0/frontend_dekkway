@@ -47,7 +47,7 @@ const Confirmation: React.FC<ConfirmationProps> = ({ reservationDetails }) => {
     
     // Vérifier si cette réservation existe déjà (basé sur l'ID de propriété et la date)
     const isDuplicate = existingReservations.some(
-      (reservation) => 
+      (reservation: { id: string; date: string; time: string }) => 
         reservation.id === newReservation.id && 
         reservation.date === newReservation.date &&
         reservation.time === newReservation.time
@@ -58,7 +58,9 @@ const Confirmation: React.FC<ConfirmationProps> = ({ reservationDetails }) => {
       const updatedReservations = [newReservation, ...existingReservations];
       localStorage.setItem('reservations', JSON.stringify(updatedReservations));
     }
-  }, []);
+  }, [reservationDetails.property.id, reservationDetails.property.name, 
+      reservationDetails.property.location, reservationDetails.property.monthlyPrice, 
+      reservationDetails.property.image, paymentDate, paymentTime]); // Ajouter les dépendances manquantes
 
   return (
     <div className="w-full mx-auto p-2">

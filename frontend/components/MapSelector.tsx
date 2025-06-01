@@ -153,7 +153,7 @@ const MapSelector = ({
       circleRef.current.setRadius(radius * 1000); // Conversion km en mètres
       onLocationChange(coordinates, radius);
     }
-  }, [radius, mapReady]);
+  }, [radius, mapReady, coordinates, onLocationChange]); // Ajouter les dépendances manquantes
 
   return (
     <div className="space-y-4">

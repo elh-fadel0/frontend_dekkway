@@ -1,5 +1,6 @@
 "use client";
-import Header from "@/components/header";
+// Suppression de l'importation non utilisée
+// import Header from "@/components/header";
 import Assistance from '@/components/Assistance';
 export default function Home() {
     return (

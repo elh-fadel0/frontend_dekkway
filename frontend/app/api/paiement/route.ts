@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-export async function POST(request: Request) {
+export async function POST(_request: Request) {
   // Simuler un délai de 2000 ms
   await new Promise((resolve) => setTimeout(resolve, 2000));
 
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
   );
 }
 
-export async function OPTIONS(request: Request) {
+export async function OPTIONS(_request: Request) {
   return new Response(null, {
     status: 204,
     headers: {

@@ -3,14 +3,34 @@
 import React from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Lock, ArrowLeft, CreditCard, Shield } from 'lucide-react';
-import Link from 'next/link';
+// Suppression de l'import non utilisé
+// import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
+import Image from 'next/image';
+
+// Définir l'interface pour les médias
+interface Media {
+  type: string;
+  fichier: string;
+}
+
+// Définir l'interface pour les données de logement
+interface LogementData {
+  id: string;
+  type?: string;
+  region?: string;
+  quartier?: string;
+  prix?: string | number;
+  medias?: Media[];
+}
+
 const VisiteGuidee = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  // Préfixer avec underscore pour indiquer qu'il est intentionnellement non utilisé
+  const _searchParams = useSearchParams();
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -48,11 +68,11 @@ const VisiteGuidee = () => {
         
         // Si les données ne sont pas dans localStorage ou si la vidéo n'est pas disponible,
         // faire une requête au backend
-        const response = await axios.get(`http://127.0.0.1:8000/details-logements/${propertyId}/`);
+        const response = await axios.get<LogementData>(`http://127.0.0.1:8000/details-logements/${propertyId}/`);
         console.log("Données du logement depuis l'API:", response.data);
         
         // Récupérer la vidéo depuis les médias
-        const video = response.data.medias?.find(media => media.type === "video")?.fichier;
+        const video = response.data.medias?.find((media: Media) => media.type === "video")?.fichier;
         console.log("URL de la vidéo:", video);
         
         if (video) {
@@ -166,8 +186,8 @@ const VisiteGuidee = () => {
           {/* Informations de paiement avec design moderne */}
           <div className="w-full md:w-2/5 space-y-4">
             <h2 className="text-xl font-semibold text-gray-800">Accès Premium</h2>
-            <p className="text-gray-600 text-sm">
-              Débloquez l'accès complet à la visite virtuelle de ce logement et explorez chaque pièce en détail.
+            <p className="text-sm text-gray-600">
+              Débloquez l&apos;accès complet à la visite virtuelle de ce logement et explorez chaque pièce en détail.
             </p>
             
             <div className="flex items-center gap-2 text-sm text-gray-700">
@@ -194,21 +214,26 @@ const VisiteGuidee = () => {
               className="bg-white border border-gray-200 hover:border-blue-400 rounded-xl p-3 flex items-center justify-center cursor-pointer transition-all hover:shadow-md"
               onClick={() => handlePayment('wave')}
             >
-              <img
+              <Image
                 src="/images/wave-logo.png"
                 alt="Wave"
-                className="h-10"
+                width={40}
+                height={40}
+                className="h-10 w-auto"
               />
             </div>
             
+            {/* Pour les balises img, remplacer par Image */}
             <div 
               className="bg-white border border-gray-200 hover:border-blue-400 rounded-xl p-3 flex items-center justify-center cursor-pointer transition-all hover:shadow-md"
               onClick={() => handlePayment('orange')}
             >
-              <img
+              <Image
                 src="/images/orange-money-logo.png"
                 alt="Orange Money"
-                className="h-10"
+                width={40}
+                height={40}
+                className="h-10 w-auto"
               />
             </div>
             
@@ -216,10 +241,12 @@ const VisiteGuidee = () => {
               className="bg-white border border-gray-200 hover:border-blue-400 rounded-xl p-3 flex items-center justify-center cursor-pointer transition-all hover:shadow-md"
               onClick={() => handlePayment('visa')}
             >
-              <img
+              <Image
                 src="/images/visa-logo.png"
                 alt="Visa"
-                className="h-10"
+                width={40}
+                height={40}
+                className="h-10 w-auto"
               />
             </div>
             
@@ -227,10 +254,12 @@ const VisiteGuidee = () => {
               className="bg-white border border-gray-200 hover:border-blue-400 rounded-xl p-3 flex items-center justify-center cursor-pointer transition-all hover:shadow-md"
               onClick={() => handlePayment('mastercard')}
             >
-              <img
+              <Image
                 src="/images/mastercard-logo.png"
                 alt="Mastercard"
-                className="h-10"
+                width={40}
+                height={40}
+                className="h-10 w-auto"
               />
             </div>
           </div>
@@ -248,8 +277,8 @@ const VisiteGuidee = () => {
       </div>
       
       <p className="mt-6 text-sm text-gray-500 text-center max-w-xl">
-        En effectuant ce paiement, vous acceptez nos conditions d'utilisation et notre politique de confidentialité. 
-        La visite virtuelle sera disponible pendant 24 heures après l'achat.
+        En effectuant ce paiement, vous acceptez nos conditions d&apos;utilisation et notre politique de confidentialité. 
+        La visite virtuelle sera disponible pendant 24 heures après l&apos;achat.
       </p>
     </div>
   );

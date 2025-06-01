@@ -195,14 +195,7 @@ const Carousel = () => {
     { src: '/images/Pcarrousel4.png', alt: 'Image 4', text: 'DEKKWAY vous propose également des services supplémentaires' },
   ];
 
-  // Auto-advance carousel
-  useEffect(() => {
-    const timer = setInterval(() => {
-      nextImage();
-    }, 4000);
-    return () => clearInterval(timer);
-  }, [currentIndex]);
-
+  // Déclaration des fonctions avant leur utilisation
   const nextImage = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
@@ -210,6 +203,23 @@ const Carousel = () => {
   const prevImage = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
   };
+
+  // Auto-advance carousel
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextImage();
+    }, 4000);
+    return () => clearInterval(timer);
+  }, [nextImage]); // Ajouter nextImage comme dépendance
+  
+  // Supprimer les déclarations dupliquées ci-dessous
+  // const nextImage = () => {
+  //   setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+  // };
+  // 
+  // const prevImage = () => {
+  //   setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  // };
 
   // Touch handlers for mobile swipe
   const handleTouchStart = (e: React.TouchEvent) => {

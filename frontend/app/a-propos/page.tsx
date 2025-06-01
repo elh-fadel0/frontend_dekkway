@@ -14,12 +14,12 @@ export default function AProposPage() {
           <div className="md:w-1/2">
             <h2 className="text-2xl font-semibold text-[#014F86] mb-4">Notre mission</h2>
             <p className="text-gray-700 mb-4">
-              Chez Dekkway, notre mission est de révolutionner l'expérience de location immobilière au Sénégal et en Afrique de l'Ouest. 
+              Chez Dekkway, notre mission est de révolutionner l&apos;expérience de location immobilière au Sénégal et en Afrique de l&apos;Ouest. 
               Nous créons une plateforme qui connecte les propriétaires et les locataires de manière transparente, sécurisée et efficace.
             </p>
             <p className="text-gray-700 mb-4">
               Nous croyons que trouver un logement devrait être une expérience simple et agréable. 
-              C'est pourquoi nous avons développé une plateforme intuitive qui permet aux utilisateurs de trouver facilement 
+              C&apos;est pourquoi nous avons développé une plateforme intuitive qui permet aux utilisateurs de trouver facilement 
               le logement idéal, tout en offrant aux propriétaires un moyen fiable de gérer leurs biens.
             </p>
           </div>
@@ -81,7 +81,7 @@ export default function AProposPage() {
             <div className="bg-[#014F86] text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">1</div>
             <div>
               <h3 className="text-lg font-medium text-[#014F86] mb-1">Les débuts</h3>
-              <p className="text-gray-700">Dekkway a été fondée en 2025 par une équipe d'étudiants passionnés par l'immobilier et la technologie. Face aux difficultés rencontrées pour trouver un logement de qualité au Sénégal, ils ont décidé de créer une solution innovante.</p>
+              <p className="text-gray-700">Dekkway a été fondée en 2025 par une équipe d&apos;étudiants passionnés par l&apos;immobilier et la technologie. Face aux difficultés rencontrées pour trouver un logement de qualité au Sénégal, ils ont décidé de créer une solution innovante.</p>
             </div>
           </div>
           
@@ -89,7 +89,7 @@ export default function AProposPage() {
             <div className="bg-[#014F86] text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">2</div>
             <div>
               <h3 className="text-lg font-medium text-[#014F86] mb-1">Croissance</h3>
-              <p className="text-gray-700">Après un lancement réussi à Thiès, Dekkway veut rapidement se développée dans d'autres villes du Sénégal, répondant à une demande croissante pour des solutions de location immobilière fiables et transparentes.</p>
+              <p className="text-gray-700">Après un lancement réussi à Thiès, Dekkway veut rapidement se développée dans d&apos;autres villes du Sénégal, répondant à une demande croissante pour des solutions de location immobilière fiables et transparentes.</p>
             </div>
           </div>
           
@@ -97,7 +97,7 @@ export default function AProposPage() {
             <div className="bg-[#014F86] text-white rounded-full w-10 h-10 flex items-center justify-center mr-4 flex-shrink-0">3</div>
             <div>
               <h3 className="text-lg font-medium text-[#014F86] mb-1">Innovation continue</h3>
-              <p className="text-gray-700">Aujourd'hui, Dekkway continue d'innover en intégrant de nouvelles fonctionnalités comme les visites virtuelles, les services de déménagement et de nettoyage, et une assistance IA pour mieux répondre aux besoins de nos utilisateurs.</p>
+              <p className="text-gray-700">Aujourd'hui, Dekkway continue d&apos;innover en intégrant de nouvelles fonctionnalités comme les visites virtuelles, les services de déménagement et de nettoyage, et une assistance IA pour mieux répondre aux besoins de nos utilisateurs.</p>
             </div>
           </div>
           
@@ -114,7 +114,7 @@ export default function AProposPage() {
       <div className="bg-white rounded-lg shadow-md p-6">
         <h2 className="text-2xl font-semibold text-[#014F86] mb-4">Notre équipe</h2>
         <p className="text-gray-700 mb-6">
-          Dekkway est composée d'une équipe diversifiée de professionnels passionnés par l'immobilier, la technologie et le service client. 
+          Dekkway est composée d&apos;une équipe diversifiée de professionnels passionnés par l&apos;immobilier, la technologie et le service client. 
           Ensemble, nous travaillons chaque jour pour améliorer votre expérience et révolutionner le secteur de la location immobilière.
         </p>
         
