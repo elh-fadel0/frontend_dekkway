@@ -15,8 +15,16 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [isCompteOpen, setIsCompteOpen] = useState(false);
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, logout } = useAuth(); // Ajouter logout du contexte
   const router = useRouter();
+
+  // Fonction de déconnexion utilisant le contexte
+  const handleLogout = () => {
+    logout(); // Utiliser la fonction logout du contexte
+    router.push("/");
+    setIsCompteOpen(false);
+    setIsOpen(false);
+  };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -138,11 +146,7 @@ export default function Header() {
                         Profil
                       </Link>
                       <button 
-                        onClick={() => {
-                          localStorage.removeItem("token");
-                          router.push("/");
-                          setIsCompteOpen(false);
-                        }}
+                        onClick={handleLogout}
                         className="block w-full text-left px-4 py-3 text-red-600 hover:bg-red-50 transition-colors"
                       >
                         <X className="inline-block mr-2 h-4 w-4" />
@@ -266,12 +270,7 @@ export default function Header() {
                           Profil
                         </Link>
                         <button 
-                          onClick={() => {
-                            localStorage.removeItem("token");
-                            router.push("/");
-                            setIsCompteOpen(false);
-                            setIsOpen(false);
-                          }}
+                          onClick={handleLogout}
                           className="block w-full text-left px-4 py-3 text-red-600 hover:bg-red-50 transition-colors"
                         >
                           <X className="inline-block mr-2 h-4 w-4" />

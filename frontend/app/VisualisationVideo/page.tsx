@@ -9,8 +9,9 @@ export default function Page() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const [loading, setLoading] = useState(true);
+    const [propertyId, setPropertyId] = useState<string | null>(null); // Ajouter l'état pour l'ID
     const [propertyData, setPropertyData] = useState({
-        videoUrl: "/videos/maison-thies.mp4", // Vidéo par défaut dès le début
+        videoUrl: "/videos/maison-thies.mp4",
         title: "Maison à louer",
         location: "Grand-Standing, Thiès",
         price: 300000
@@ -19,46 +20,41 @@ export default function Page() {
     useEffect(() => {
         const fetchPropertyData = async () => {
             try {
-                // Essayer de récupérer l'ID de différentes façons
-                const propertyId = searchParams.get('id') || searchParams.get('video');
+                const propertyIdFromParams = searchParams.get('id') || searchParams.get('video');
                 
-                // Stocker l'ID dans localStorage pour le récupérer plus tard si nécessaire
-                if (propertyId) {
-                    localStorage.setItem('currentPropertyId', propertyId);
+                if (propertyIdFromParams) {
+                    localStorage.setItem('currentPropertyId', propertyIdFromParams);
+                    setPropertyId(propertyIdFromParams); // Stocker l'ID
                 } else {
-                    // Essayer de récupérer l'ID depuis localStorage
                     const storedId = localStorage.getItem('currentPropertyId');
                     if (!storedId) {
                         console.log("Aucun ID de logement trouvé, utilisation des données par défaut");
                         setLoading(false);
                         return;
                     }
+                    setPropertyId(storedId); // Stocker l'ID depuis localStorage
                 }
                 
-                // Utiliser l'ID stocké ou celui des paramètres
-                const idToUse = propertyId || localStorage.getItem('currentPropertyId');
+                const idToUse = propertyIdFromParams || localStorage.getItem('currentPropertyId');
                 
                 if (!idToUse) {
                     setLoading(false);
                     return;
                 }
                 
-                // Utiliser le même endpoint que detaillog
                 const response = await axios.get(`http://127.0.0.1:8000/details-logements/${idToUse}/`);
                 const data = response.data;
                 
-                // Récupérer la vidéo depuis les médias
                 const video = data.medias?.find(media => media.type === "video")?.fichier || "/videos/maison-thies.mp4";
                 
                 setPropertyData({
-                    videoUrl: video, // Utiliser la vidéo par défaut si aucune n'est trouvée
+                    videoUrl: video,
                     title: `${data.type || "Logement"} - ${data.region || ""}`,
                     location: `${data.quartier || ""}, ${data.region || ""}`,
                     price: typeof data.prix === 'string' ? parseInt(data.prix.replace(/[^0-9]/g, '')) : (data.prix || 0)
                 });
             } catch (error) {
                 console.log('Erreur lors de la récupération des données:', error);
-                // Les données par défaut sont déjà définies dans l'état initial
             } finally {
                 setLoading(false);
             }
@@ -96,6 +92,7 @@ export default function Page() {
                 title={propertyData.title}
                 location={propertyData.location}
                 price={propertyData.price}
+                propertyId={propertyId} // Passer l'ID de la propriété
             />
         </div>
     );

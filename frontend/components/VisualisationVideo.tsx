@@ -2,8 +2,6 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-// Suppression de l'import non utilisé
-// import { Play } from 'lucide-react';
 
 interface VisualisationVideoProps {
   videoUrl: string;
@@ -11,6 +9,7 @@ interface VisualisationVideoProps {
   location: string;
   price: number;
   currency?: string;
+  propertyId?: string | number; // Ajouter l'ID de la propriété
 }
 
 export default function VisualisationVideo({
@@ -19,13 +18,22 @@ export default function VisualisationVideo({
   location,
   price,
   currency = 'FCFAA',
+  propertyId, // Ajouter propertyId
 }: VisualisationVideoProps) {
-  // Préfixer avec underscore pour indiquer qu'il est intentionnellement non utilisé
-  const _router = useRouter();
+  const router = useRouter(); // Enlever l'underscore
 
   const handleReserve = () => {
-    alert('Réservation effectuée !');
-    // ou router.push('/formulaire-reservation');
+    // Créer les données de propriété pour Reservloge
+    const propertyData = {
+      id: propertyId,
+      nom: title,
+      ville: location,
+      prix: price,
+      image: '' // Vous pouvez ajouter une image par défaut ou la passer en props
+    };
+    
+    // Naviguer vers Reservloge avec les données de propriété
+    router.push(`/Reservloge?property=${encodeURIComponent(JSON.stringify(propertyData))}`);
   };
   
   const [videoError, setVideoError] = useState(false);

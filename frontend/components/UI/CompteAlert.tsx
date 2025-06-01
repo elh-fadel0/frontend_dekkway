@@ -1,17 +1,17 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/app/context/AuthContext";
 
 interface CompteAlertProps {
   onClose: () => void;
-  isLoggedIn: boolean;
 }
 
-const CompteAlert: React.FC<CompteAlertProps> = ({ onClose, isLoggedIn }) => {
+const CompteAlert: React.FC<CompteAlertProps> = ({ onClose }) => {
   const menuRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
+  const { isAuthenticated, logout } = useAuth();
 
   // Fermer le menu si on clique en dehors
   useEffect(() => {
@@ -42,7 +42,7 @@ const CompteAlert: React.FC<CompteAlertProps> = ({ onClose, isLoggedIn }) => {
       onMouseLeave={onClose}
     >
       <ul className="py-2 text-gray-800">
-        {isLoggedIn ? (
+        {isAuthenticated ? (
           <>
             <Link href="/Profil">
               <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Mon Profil</li>
