@@ -58,9 +58,17 @@ const Confirmation: React.FC<ConfirmationProps> = ({ reservationDetails }) => {
       const updatedReservations = [newReservation, ...existingReservations];
       localStorage.setItem('reservations', JSON.stringify(updatedReservations));
     }
+
+    // Redirection automatique vers les services supplémentaires après 3 secondes
+    const redirectTimer = setTimeout(() => {
+      router.push('/servicessuplementaires');
+    }, 3000);
+
+    // Nettoyer le timer si le composant est démonté
+    return () => clearTimeout(redirectTimer);
   }, [reservationDetails.property.id, reservationDetails.property.name, 
       reservationDetails.property.location, reservationDetails.property.monthlyPrice, 
-      reservationDetails.property.image, paymentDate, paymentTime]); // Ajouter les dépendances manquantes
+      reservationDetails.property.image, paymentDate, paymentTime, router]);
 
   return (
     <div className="w-full mx-auto p-2">
@@ -141,10 +149,10 @@ const Confirmation: React.FC<ConfirmationProps> = ({ reservationDetails }) => {
         </div>
       </div>
 
-      {/* Bouton de retour */}
+      {/* Bouton de retour et message de redirection */}
       <div className="mt-6 sm:mt-8 text-center">
-        {/* Boutons de navigation */}
-        <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+        {/* Bouton unique et message de redirection */}
+        <div className="flex flex-col items-center gap-4">
           <button
             onClick={() => router.push('/Reservations')}
             className="py-2 px-4 sm:px-6 bg-[#014F86] text-white text-sm rounded-lg font-normal hover:bg-[#FC9B89] transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5 duration-200"
@@ -152,12 +160,14 @@ const Confirmation: React.FC<ConfirmationProps> = ({ reservationDetails }) => {
             Voir mes réservations
           </button>
           
-          <button
-            onClick={() => router.push('/servicessuplementaires')}
-            className="py-2 px-4 sm:px-6 bg-[#FC9B89] text-white text-sm rounded-lg font-normal hover:bg-[#014F86] transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5 duration-200"
-          >
-            Découvrir nos services supplémentaires
-          </button>
+          <div className="text-center">
+            <p className="text-sm text-[#014F86] mb-2">
+              Redirection automatique vers nos services supplémentaires dans quelques secondes...
+            </p>
+            <div className="flex justify-center">
+              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-[#FC9B89]"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

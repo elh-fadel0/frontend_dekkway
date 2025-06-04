@@ -43,7 +43,7 @@ const ReservationPage: React.FC = () => {
             id: Number(apiData.id),
             name: apiData.nom,
             location: apiData.ville,
-            monthlyPrice: apiData.prix,
+            monthlyPrice: apiData.prix / 100, // Diviser par 100 pour corriger le prix
             image: apiData.image
           }
         }));
@@ -159,17 +159,15 @@ function Reservloge() {
             id: Number(apiData.id),
             name: apiData.nom,
             location: apiData.ville,
-            monthlyPrice: apiData.prix,
+            monthlyPrice: apiData.prix, // Diviser par 100 pour corriger le prix
             image: apiData.image
           }
         }));
       } catch (error) {
         console.error('Erreur de conversion des données:', error);
-        // Rediriger vers la page d'accueil en cas d'erreur
         router.push('/');
       }
     } else {
-      // Si aucune donnée de propriété n'est disponible, rediriger vers la page d'accueil
       router.push('/');
     }
   }, [searchParams, router]);
